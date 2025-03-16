@@ -2,6 +2,9 @@ server:
   port: ${PORT}
 
 spring:
+  main:
+    banner-mode: console
+
   datasource:
     url: ${DB_URL}
     username: ${DB_USERNAME}
