@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.unicartagena</groupId>
-	<artifactId>reservationsApi</artifactId>
+	<artifactId>CampusGoBackend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>reservationsApi</name>
+	<name>CampusGoBackend</name>
 	<description>project for app developments</description>
 	<url/>
 	<licenses>
