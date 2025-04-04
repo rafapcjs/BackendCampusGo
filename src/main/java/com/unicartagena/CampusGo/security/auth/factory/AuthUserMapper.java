@@ -2,6 +2,8 @@ package com.unicartagena.CampusGo.security.auth.factory;
 
 import com.unicartagena.CampusGo.security.auth.persistencie.rol.RoleEntity;
 import com.unicartagena.CampusGo.security.auth.presentation.payload.AuthCreateUserRequest;
+import com.unicartagena.CampusGo.student.presentation.payload.StudentPayload;
+import com.unicartagena.CampusGo.teacher.presentation.payload.TeacherPayload;
 import com.unicartagena.CampusGo.user.persistencie.entities.UserEntity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -43,6 +45,34 @@ public class AuthUserMapper {
                 .email(request.email())
                 .phone(request.phone())
                 .password(passwordEncoder.encode(request.password()))
+                .roles(roles)
+                .isEnabled(true)
+                .accountNoLocked(true)
+                .accountNoExpired(true)
+                .credentialNoExpired(true)
+                .build();
+    }
+    public UserEntity toUserEntity(TeacherPayload payload, Set<RoleEntity> roles, PasswordEncoder passwordEncoder) {
+        return UserEntity.builder()
+                .username(payload.username())
+                .dni(payload.dni())
+                .email(payload.email())
+                .phone(payload.phone())
+                .password(passwordEncoder.encode(payload.password()))
+                .roles(roles)
+                .isEnabled(true)
+                .accountNoLocked(true)
+                .accountNoExpired(true)
+                .credentialNoExpired(true)
+                .build();
+    }
+    public UserEntity toUserEntity(StudentPayload payload, Set<RoleEntity> roles, PasswordEncoder passwordEncoder) {
+        return UserEntity.builder()
+                .username(payload.username())
+                .dni(payload.dni())
+                .email(payload.email())
+                .phone(payload.phone())
+                .password(passwordEncoder.encode(payload.password()))
                 .roles(roles)
                 .isEnabled(true)
                 .accountNoLocked(true)

@@ -33,7 +33,8 @@ import io.swagger.v3.oas.annotations.servers.Server;
         servers = {
                 @Server(
                         description = "Swagger UI - Campus GO",
-                        url = "https://backendcampusgo-2.onrender.com/swagger-ui/index.html"
+                        url = "http://localhost:8080"
+
                 )
         }
 )
