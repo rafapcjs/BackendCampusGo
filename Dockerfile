@@ -1,6 +1,4 @@
 # Etapa 1: Compilación
-
-# Usa la imagen base de Eclipse Temurin con JDK
 FROM eclipse-temurin:21-jdk AS build
 
 WORKDIR /root
@@ -20,17 +18,21 @@ RUN ./mvnw dependency:go-offline
 COPY ./src ./src
 RUN ./mvnw clean package -DskipTests
 
+# Verificar que el JAR se generó correctamente
+RUN ls -l /root/target/
+
 # Etapa 2: Imagen final
-FROM eclipse-temurin:21-jdk
+FROM eclipse-temurin:21-jre
 WORKDIR /root
 
 # Copiar el JAR generado desde la etapa de construcción
-COPY --from=build /root/target/CampusGoBackend-0.0.1-SNAPSHOT.jar  /root/target/CampusGoBackend-0.0.1-SNAPSHOT.jar
+COPY --from=build /root/target/CampusGoBackend-0.0.1-SNAPSHOT.jar /root/app.jar
 
+# Otorgar permisos de ejecución al JAR
+RUN chmod +x /root/app.jar
 
-# Define el puerto que expondrá la aplicación
+# Exponer el puerto
 EXPOSE 8080
 
-
-# Define el comando que se ejecutará cuando inicie el contenedor
-ENTRYPOINT ["java","-jar","/root/target/CampusGoBackend-0.0.1-SNAPSHOT.jar "]
+# Definir el comando de inicio
+ENTRYPOINT ["java", "-jar", "/root/app.jar"]

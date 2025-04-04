@@ -23,10 +23,3 @@ spring:
   sql:
     init:
       mode: always  # Permite cargar scripts SQL al inicio (opcional)
-
-security:
-  jwt:
-    key:
-      private: ${JWT_PRIVATE_KEY}  # Se debe definir en variables de entorno
-    user:
-      generator: "auth-service"
